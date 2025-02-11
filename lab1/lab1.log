@@ -21,4 +21,13 @@ user systemd-timesync has id 997
 user messagebus has id 100
 user sshd has id 101
 user nikita has id 1000
-Last password change date for root: 2025-02-11
+user vboxadd has id 999
+user u1 has id 1001
+user user has id 1002
+Last password change date for root:  Feb 11, 2025
+root,daemon,bin,sys,adm,tty,disk,lp,mail,news,uucp,man,proxy,kmem,dialout,fax,voice,cdrom,floppy,tape,sudo,audio,dip,www-data,backup,operator,list,irc,src,shadow,utmp,video,sasl,plugdev,staff,games,users,nogroup,systemd-journal,systemd-network,crontab,input,sgx,kvm,render,netdev,systemd-timesync,messagebus,_ssh,nikita,vboxsf,vboxdrmipc,g1,u1,user
+Name: u1
+Id: 1001
+Groups: u1 g1
+GroupIds: 1002 1001
+Group users: u1,user
