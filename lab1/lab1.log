@@ -1,0 +1,24 @@
+user root has id 0
+user daemon has id 1
+user bin has id 2
+user sys has id 3
+user sync has id 4
+user games has id 5
+user man has id 6
+user lp has id 7
+user mail has id 8
+user news has id 9
+user uucp has id 10
+user proxy has id 13
+user www-data has id 33
+user backup has id 34
+user list has id 38
+user irc has id 39
+user _apt has id 42
+user nobody has id 65534
+user systemd-network has id 998
+user systemd-timesync has id 997
+user messagebus has id 100
+user sshd has id 101
+user nikita has id 1000
+Last password change date for root: 2025-02-11
