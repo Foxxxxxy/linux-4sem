@@ -2,7 +2,7 @@
 
 echo -e "Start processing...\n"
 
-output_file="lab1.log"
+output_file="/home/lab1.log"
 > "$output_file"
 
 if [[ ! -f "/etc/passwd" ]]; then
