@@ -40,10 +40,10 @@ echo "Be careful!" > "/etc/skel/warning.txt"
 
 echo -e "Creating u1 and g1...\n"
 
-sudo groupadd "g1"
-sudo useradd -m -s /bin/bash "u1"
-echo "u1:12345678" | sudo chpasswd
-sudo usermod -a -G "g1" "u1"
+groupadd "g1"
+useradd -m -s /bin/bash "u1"
+echo "u1:12345678" | chpasswd
+usermod -a -G "g1" "u1"
 
 echo -e "Getting info about user u1...\n"
 
@@ -55,14 +55,53 @@ echo "Id: $id" >> "$output_file"
 echo "Groups: $groups" >> "$output_file"
 echo "GroupIds: $groupIds" >> "$output_file"
 
-echo -e "Creating user and adding user to g1...\n"
+echo -e "Adding user to g1...\n"
 
-sudo useradd -m -s /bin/bash "user"
-echo "user:12345678" | sudo chpasswd
-sudo usermod -a -G "g1" "user"
+usermod -a -G "g1" "user"
 groupUsers=$(awk -F':' -v group="g1" '$1 == group {print $4}' /etc/group)
 echo "Group users: $groupUsers" >> "$output_file"
 
 echo -e "Changing u1 shell to mc...\n"
 
-sudo usermod -s /usr/bin/mc "u1"
+usermod -s /usr/bin/mc "u1"
+
+echo -e "Creating u2...\n"
+
+useradd -m "u2"
+echo "u2:87654321" | chpasswd
+
+echo -e "Creating test13...\n"
+
+mkdir /home/test13
+cp "$output_file" /home/test13/lab1-1.log
+cp "$output_file" /home/test13/lab1-2.log
+
+echo -e "Granting permissions for test13...\n"
+
+usermod -a -G "g1" "u2"
+chown u1:g1 -R /home/test13
+chmod 750 /home/test13
+chmod 640 /home/test13/*
+
+echo -e "Creating test14 and granting permissions to it...\n"
+
+mkdir /home/test14
+chmod 1777 /home/test14
+chown u1 /home/test14
+
+echo -e "Copying nano and granting permissions to modify test13 files...\n"
+
+cp /usr/bin/nano /home/test14
+chmod u+s /home/test14/nano
+
+echo -e "Creating secret file and removing read access...\n"
+
+mkdir /home/test15
+touch /home/test15/secret_file
+echo "secret" >> /home/test15/secret_file
+chmod a-r /home/test15
+
+echo -e "Granting permissions to sudo for u1...\n"
+
+rule="u1 ALL = /usr/bin/passwd [A-Za-z]*, !/usr/bin/passwd *root*"
+echo "$rule" >> /etc/sudoers
